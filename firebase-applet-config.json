@@ -7,5 +7,8 @@
   "storageBucket": "arcane-nomad-wdzcr.firebasestorage.app",
   "messagingSenderId": "388277994558",
   "measurementId": "",
-  "oAuthClientId": "388277994558-7vs0hpstdajibam0jgj9oej0cl2gqpdu.apps.googleusercontent.com"
+  "oAuthClientId": "388277994558-7vs0hpstdajibam0jgj9oej0cl2gqpdu.apps.googleusercontent.com",
+  "adminEmails": [
+    "osamakhaled01010@gmail.com"
+  ]
 }
