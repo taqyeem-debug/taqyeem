@@ -1,9 +1,19 @@
-
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword, signOut as firebaseSignOut, updatePassword as firebaseUpdatePassword, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import {
+  getAuth,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+  GoogleAuthProvider,
+  signOut as firebaseSignOut,
+  updatePassword as firebaseUpdatePassword,
+  createUserWithEmailAndPassword,
+} from 'firebase/auth';
 import { app } from './firebase';
 
 export const auth = getAuth(app);
+
+const googleProvider = new GoogleAuthProvider();
+googleProvider.setCustomParameters({ prompt: 'select_account' });
 
 // For admin to create teacher accounts without logging out
 let secondaryApp: any = null;
@@ -18,9 +28,12 @@ export const createSecondaryUser = async (email: string, pass: string) => {
   return cred.user;
 };
 
-
 export const login = async (email: string, pass: string) => {
   return await signInWithEmailAndPassword(auth, email, pass);
+};
+
+export const loginWithGoogle = async () => {
+  return await signInWithPopup(auth, googleProvider);
 };
 
 export const logout = async () => {
@@ -28,6 +41,6 @@ export const logout = async () => {
 };
 
 export const updatePassword = async (newPassword: string): Promise<void> => {
-  if (!auth.currentUser) throw new Error("No authenticated user");
+  if (!auth.currentUser) throw new Error('No authenticated user');
   await firebaseUpdatePassword(auth.currentUser, newPassword);
 };
